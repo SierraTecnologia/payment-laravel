@@ -1,11 +1,11 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Unit;
+namespace SierraTecnologia\Cashier\Tests\Unit;
 
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Response;
-use Laravel\Cashier\Http\Controllers\WebhookController;
+use SierraTecnologia\Cashier\Http\Controllers\WebhookController;
 
 class WebhookControllerTest extends TestCase
 {

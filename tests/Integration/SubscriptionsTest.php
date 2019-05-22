@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Integration;
+namespace SierraTecnologia\Cashier\Tests\Integration;
 
 use DateTime;
 use SierraTecnologia\Plan;
@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use SierraTecnologia\Coupon;
 use SierraTecnologia\Product;
 use Illuminate\Support\Str;
-use Laravel\Cashier\Exceptions\SubscriptionCreationFailed;
+use SierraTecnologia\Cashier\Exceptions\SubscriptionCreationFailed;
 
 class SubscriptionsTest extends IntegrationTestCase
 {

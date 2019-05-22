@@ -8,7 +8,7 @@
 
 To accommodate for this new behavior from now on Cashier will cancel that subscription immediately and throw a custom `SubscriptionCreationFailed` exception when a subscription is created with an "incomplete" or "incomplete_expired" status. We've decided to do this because in general you want to let a customer only start using your product when payment was received.
 
-If you were relying on catching the `\SierraTecnologia\Error\Card` exception before you should now rely on catching the `Laravel\Cashier\Exceptions\SubscriptionCreationFailed` exception instead. 
+If you were relying on catching the `\SierraTecnologia\Error\Card` exception before you should now rely on catching the `SierraTecnologia\Cashier\Exceptions\SubscriptionCreationFailed` exception instead. 
 
 ### Card Failure When Swapping Plans
 

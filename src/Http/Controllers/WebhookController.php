@@ -1,15 +1,15 @@
 <?php
 
-namespace Laravel\Cashier\Http\Controllers;
+namespace SierraTecnologia\Cashier\Http\Controllers;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Laravel\Cashier\Cashier;
+use SierraTecnologia\Cashier\Cashier;
 use Illuminate\Support\Carbon;
-use Laravel\Cashier\Subscription;
+use SierraTecnologia\Cashier\Subscription;
 use Illuminate\Routing\Controller;
 use Symfony\Component\HttpFoundation\Response;
-use Laravel\Cashier\Http\Middleware\VerifyWebhookSignature;
+use SierraTecnologia\Cashier\Http\Middleware\VerifyWebhookSignature;
 
 class WebhookController extends Controller
 {
@@ -167,7 +167,7 @@ class WebhookController extends Controller
      * Get the billable entity instance by SierraTecnologia ID.
      *
      * @param  string  $sierratecnologiaId
-     * @return \Laravel\Cashier\Billable
+     * @return \SierraTecnologia\Cashier\Billable
      */
     protected function getUserBySierraTecnologiaId($sierratecnologiaId)
     {

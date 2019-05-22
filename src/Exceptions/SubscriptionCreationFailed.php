@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier\Exceptions;
+namespace SierraTecnologia\Cashier\Exceptions;
 
 use Exception;
 use SierraTecnologia\Subscription;

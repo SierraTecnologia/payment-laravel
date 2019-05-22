@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier\Http\Middleware;
+namespace SierraTecnologia\Cashier\Http\Middleware;
 
 use Closure;
 use SierraTecnologia\WebhookSignature;

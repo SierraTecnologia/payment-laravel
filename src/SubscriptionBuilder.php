@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Cashier;
+namespace SierraTecnologia\Cashier;
 
 use Carbon\Carbon;
 use DateTimeInterface;
-use Laravel\Cashier\Exceptions\SubscriptionCreationFailed;
+use SierraTecnologia\Cashier\Exceptions\SubscriptionCreationFailed;
 
 class SubscriptionBuilder
 {
@@ -184,7 +184,7 @@ class SubscriptionBuilder
      * Add a new SierraTecnologia subscription to the SierraTecnologia model.
      *
      * @param  array  $options
-     * @return \Laravel\Cashier\Subscription
+     * @return \SierraTecnologia\Cashier\Subscription
      */
     public function add(array $options = [])
     {
@@ -196,7 +196,7 @@ class SubscriptionBuilder
      *
      * @param  string|null  $token
      * @param  array  $options
-     * @return \Laravel\Cashier\Subscription
+     * @return \SierraTecnologia\Cashier\Subscription
      */
     public function create($token = null, array $options = [])
     {

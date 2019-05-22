@@ -1,12 +1,12 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Integration;
+namespace SierraTecnologia\Cashier\Tests\Integration;
 
 use SierraTecnologia\Plan;
 use SierraTecnologia\Product;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Laravel\Cashier\Http\Controllers\WebhookController;
+use SierraTecnologia\Cashier\Http\Controllers\WebhookController;
 
 class WebhooksTest extends IntegrationTestCase
 {

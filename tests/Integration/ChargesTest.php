@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Integration;
+namespace SierraTecnologia\Cashier\Tests\Integration;
 
 use SierraTecnologia\Charge;
 

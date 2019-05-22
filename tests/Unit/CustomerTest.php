@@ -1,10 +1,10 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Unit;
+namespace SierraTecnologia\Cashier\Tests\Unit;
 
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
-use Laravel\Cashier\Tests\Fixtures\User;
+use SierraTecnologia\Cashier\Tests\Fixtures\User;
 
 class CustomerTest extends TestCase
 {

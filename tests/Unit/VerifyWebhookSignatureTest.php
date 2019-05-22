@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Unit;
+namespace SierraTecnologia\Cashier\Tests\Unit;
 
 use Mockery as m;
 use Illuminate\Http\Request;
@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Config\Repository as Config;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Laravel\Cashier\Http\Middleware\VerifyWebhookSignature;
+use SierraTecnologia\Cashier\Http\Middleware\VerifyWebhookSignature;
 
 final class VerifyWebhookSignatureTest extends TestCase
 {

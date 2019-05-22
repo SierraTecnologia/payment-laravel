@@ -166,7 +166,7 @@
                         <tr>
                             <td>Tax ({{ $invoice->tax_percent }}%)</td>
                             <td>&nbsp;</td>
-                            <td>{{ Laravel\Cashier\Cashier::formatAmount($invoice->tax) }}</td>
+                            <td>{{ SierraTecnologia\Cashier\Cashier::formatAmount($invoice->tax) }}</td>
                         </tr>
                     @endif
 

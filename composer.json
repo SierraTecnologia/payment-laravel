@@ -39,7 +39,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravel\\Cashier\\Tests\\": "tests/"
+            "SierraTecnologia\\Cashier\\Tests\\": "tests/"
         }
     },
     "extra": {
@@ -48,7 +48,7 @@
         },
         "laravel": {
             "providers": [
-                "Laravel\\Cashier\\CashierServiceProvider"
+                "SierraTecnologia\\Cashier\\CashierServiceProvider"
             ]
         }
     },

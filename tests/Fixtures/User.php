@@ -1,8 +1,8 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Fixtures;
+namespace SierraTecnologia\Cashier\Tests\Fixtures;
 
-use Laravel\Cashier\Billable;
+use SierraTecnologia\Cashier\Billable;
 use Illuminate\Database\Eloquent\Model;
 
 class User extends Model

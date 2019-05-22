@@ -1,6 +1,6 @@
 <?php
 
-namespace Laravel\Cashier;
+namespace SierraTecnologia\Cashier;
 
 use Carbon\Carbon;
 

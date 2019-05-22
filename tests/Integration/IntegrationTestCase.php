@@ -1,13 +1,13 @@
 <?php
 
-namespace Laravel\Cashier\Tests\Integration;
+namespace SierraTecnologia\Cashier\Tests\Integration;
 
 use SierraTecnologia\SierraTecnologia;
 use SierraTecnologia\ApiResource;
 use SierraTecnologia\Error\InvalidRequest;
 use Orchestra\Testbench\TestCase;
-use Laravel\Cashier\Tests\Fixtures\User;
-use Laravel\Cashier\CashierServiceProvider;
+use SierraTecnologia\Cashier\Tests\Fixtures\User;
+use SierraTecnologia\Cashier\CashierServiceProvider;
 use Illuminate\Database\Eloquent\Model as Eloquent;
 
 abstract class IntegrationTestCase extends TestCase
