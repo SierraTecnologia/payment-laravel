@@ -12,7 +12,7 @@ class Cashier
      *
      * @var string
      */
-    const SIERRATECNOLOGIA_VERSION = '2019-03-14';
+    const SITECPAYMENT_VERSION = '2019-03-14';
 
     /**
      * The publishable SierraTecnologia API key.
@@ -67,7 +67,7 @@ class Cashier
             return static::$sierratecnologiaKey;
         }
 
-        if ($key = getenv('SIERRATECNOLOGIA_KEY')) {
+        if ($key = getenv('SITECPAYMENT_KEY')) {
             return $key;
         }
 
@@ -96,7 +96,7 @@ class Cashier
             return static::$sierratecnologiaSecret;
         }
 
-        if ($key = getenv('SIERRATECNOLOGIA_SECRET')) {
+        if ($key = getenv('SITECPAYMENT_SECRET')) {
             return $key;
         }
 
@@ -124,7 +124,7 @@ class Cashier
     {
         return array_merge([
             'api_key' => static::sierratecnologiaSecret(),
-            'sierratecnologia_version' => static::SIERRATECNOLOGIA_VERSION,
+            'sitecpayment_version' => static::SITECPAYMENT_VERSION,
         ], $options);
     }
 
@@ -135,7 +135,7 @@ class Cashier
      */
     public static function sierratecnologiaModel()
     {
-        return getenv('SIERRATECNOLOGIA_MODEL') ?: config('services.sierratecnologia.model', 'App\\User');
+        return getenv('SITECPAYMENT_MODEL') ?: config('services.sierratecnologia.model', 'App\\User');
     }
 
     /**

@@ -21,7 +21,7 @@ abstract class IntegrationTestCase extends TestCase
     {
         parent::setUpBeforeClass();
 
-        SierraTecnologia::setApiKey(getenv('SIERRATECNOLOGIA_SECRET'));
+        SierraTecnologia::setApiKey(getenv('SITECPAYMENT_SECRET'));
     }
 
     public function setUp(): void

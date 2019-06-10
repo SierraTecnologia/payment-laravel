@@ -218,8 +218,8 @@ class SubscriptionBuilder
 
         return $this->owner->subscriptions()->create([
             'name' => $this->name,
-            'sierratecnologia_id' => $subscription->id,
-            'sierratecnologia_plan' => $this->plan,
+            'sitecpayment_id' => $subscription->id,
+            'sitecpayment_plan' => $this->plan,
             'quantity' => $this->quantity,
             'trial_ends_at' => $trialEndsAt,
             'ends_at' => null,

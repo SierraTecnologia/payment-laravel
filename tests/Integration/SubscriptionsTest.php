@@ -380,8 +380,8 @@ class SubscriptionsTest extends IntegrationTestCase
 
         $subscription = $user->subscriptions()->create([
             'name' => 'yearly',
-            'sierratecnologia_id' => 'xxxx',
-            'sierratecnologia_plan' => 'sierratecnologia-yearly',
+            'sitecpayment_id' => 'xxxx',
+            'sitecpayment_plan' => 'sitecpayment-yearly',
             'quantity' => 1,
             'trial_ends_at' => null,
             'ends_at' => null,

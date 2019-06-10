@@ -16,6 +16,6 @@
     </testsuites>
     <php>
         <env name="DB_CONNECTION" value="testing"/>
-        <env name="SIERRATECNOLOGIA_MODEL" value="SierraTecnologia\Cashier\Tests\Fixtures\User"/>
+        <env name="SITECPAYMENT_MODEL" value="SierraTecnologia\Cashier\Tests\Fixtures\User"/>
     </php>
 </phpunit>

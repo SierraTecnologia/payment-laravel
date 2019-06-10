@@ -14,7 +14,7 @@ class CreateCustomerColumns extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('sierratecnologia_id')->nullable()->collation('utf8mb4_bin');
+            $table->string('sitecpayment_id')->nullable()->collation('utf8mb4_bin');
             $table->string('card_brand')->nullable();
             $table->string('card_last_four', 4)->nullable();
             $table->timestamp('trial_ends_at')->nullable();
@@ -30,7 +30,7 @@ class CreateCustomerColumns extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn([
-                'sierratecnologia_id',
+                'sitecpayment_id',
                 'card_brand',
                 'card_last_four',
                 'trial_ends_at',

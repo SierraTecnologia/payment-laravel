@@ -153,7 +153,7 @@ class WebhookController extends Controller
             });
 
             $user->forceFill([
-                'sierratecnologia_id' => null,
+                'sitecpayment_id' => null,
                 'trial_ends_at' => null,
                 'card_brand' => null,
                 'card_last_four' => null,
@@ -173,7 +173,7 @@ class WebhookController extends Controller
     {
         $model = Cashier::sierratecnologiaModel();
 
-        return (new $model)->where('sierratecnologia_id', $sierratecnologiaId)->first();
+        return (new $model)->where('sitecpayment_id', $sierratecnologiaId)->first();
     }
 
     /**

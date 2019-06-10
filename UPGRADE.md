@@ -34,10 +34,10 @@ If you were calling the `createAsSierraTecnologiaCustomer` method directly you n
 
 Instead of calling the SierraTecnologia API to verify incoming webhook events, Cashier now only uses webhook signatures to verify that events it receives are authentic as of [PR #591](https://github.com/laravel/cashier/pull/591).
 
-The `VerifyWebhookSignature` middleware is now automatically added to the `WebhookController` if the `services.sierratecnologia.webhook.secret` value is set in your `services.php` configuration file. By default, this configuration value uses the `SIERRATECNOLOGIA_WEBHOOK_SECRET` environment variable.
+The `VerifyWebhookSignature` middleware is now automatically added to the `WebhookController` if the `services.sierratecnologia.webhook.secret` value is set in your `services.php` configuration file. By default, this configuration value uses the `SITECPAYMENT_WEBHOOK_SECRET` environment variable.
 
 If you manually added the `VerifyWebhookSignature` middleware to your Cashier webhook route, you may remove it since it will now be added automatically.
 
-If you were using the `CASHIER_ENV` environment variable to test incoming webhooks, you should set the `SIERRATECNOLOGIA_WEBHOOK_SECRET` environment variable to `null` to achieve the same behavior.
+If you were using the `CASHIER_ENV` environment variable to test incoming webhooks, you should set the `SITECPAYMENT_WEBHOOK_SECRET` environment variable to `null` to achieve the same behavior.
 
 More information about verifying webhooks can be found [in the Cashier documentation](https://laravel.com/docs/5.7/billing#verifying-webhook-signatures).

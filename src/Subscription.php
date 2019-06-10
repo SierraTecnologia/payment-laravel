@@ -394,7 +394,7 @@ class Subscription extends Model
         }
 
         $this->fill([
-            'sierratecnologia_plan' => $plan,
+            'sitecpayment_plan' => $plan,
             'ends_at' => null,
         ])->save();
 
