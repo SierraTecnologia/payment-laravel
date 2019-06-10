@@ -1,6 +1,6 @@
 {
     "name": "sierratecnologia/payment-laravel",
-    "description": "Laravel Cashier provides an expressive, fluent interface to SierraTecnologia's subscription billing services.",
+    "description": "Sierratecnologia Cashier provides an expressive, fluent interface to SierraTecnologia's subscription billing services.",
     "keywords": ["laravel", "sierratecnologia", "billing"],
     "license": "MIT",
     "support": {
