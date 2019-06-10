@@ -49,6 +49,9 @@
         "laravel": {
             "providers": [
                 "SierraTecnologia\\Cashier\\CashierServiceProvider"
+            ],
+            "dont-discover": [
+                "laravel/cashier"
             ]
         }
     },
