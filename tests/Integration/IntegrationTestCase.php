@@ -51,10 +51,12 @@ abstract class IntegrationTestCase extends TestCase
 
     protected function createCustomer($description = 'taylor'): User
     {
-        return User::create([
+        return User::create(
+            [
             'email' => "{$description}@cashier-test.com",
             'name' => 'Ricardo Sierra',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
-        ]);
+            ]
+        );
     }
 }

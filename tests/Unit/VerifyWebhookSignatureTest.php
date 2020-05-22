@@ -24,9 +24,11 @@ final class VerifyWebhookSignatureTest extends TestCase
             ->setSignedSignature('secret');
 
         $response = (new VerifyWebhookSignature($mock->app, $mock->config))
-            ->handle($mock->request, function ($request) {
-                return new Response('OK');
-            });
+            ->handle(
+                $mock->request, function ($request) {
+                    return new Response('OK');
+                }
+            );
 
         $this->assertEquals('OK', $response->content());
     }
@@ -40,8 +42,10 @@ final class VerifyWebhookSignatureTest extends TestCase
         $this->expectException(HttpException::class);
 
         (new VerifyWebhookSignature($mock->app, $mock->config))
-            ->handle($mock->request, function ($request) {
-            });
+            ->handle(
+                $mock->request, function ($request) {
+                }
+            );
     }
 
     public function test_app_aborts_when_no_secret_was_provided()
@@ -53,8 +57,10 @@ final class VerifyWebhookSignatureTest extends TestCase
         $this->expectException(HttpException::class);
 
         (new VerifyWebhookSignature($mock->app, $mock->config))
-            ->handle($mock->request, function ($request) {
-            });
+            ->handle(
+                $mock->request, function ($request) {
+                }
+            );
     }
 }
 

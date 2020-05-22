@@ -22,16 +22,18 @@ trait Billable
     /**
      * Make a "one off" charge on the customer for the given amount.
      *
-     * @param  int  $amount
-     * @param  array  $options
+     * @param  int   $amount
+     * @param  array $options
      * @return \SierraTecnologia\Charge
      * @throws \InvalidArgumentException
      */
     public function charge($amount, array $options = [])
     {
-        $options = array_merge([
+        $options = array_merge(
+            [
             'currency' => $this->preferredCurrency(),
-        ], $options);
+            ], $options
+        );
 
         $options['amount'] = $amount;
 
@@ -49,7 +51,7 @@ trait Billable
     /**
      * Refund a customer for a charge.
      *
-     * @param  string  $charge
+     * @param  string $charge
      * @param  array  $options
      * @return \SierraTecnologia\Refund
      * @throws \InvalidArgumentException
@@ -74,8 +76,8 @@ trait Billable
     /**
      * Add an invoice item to the customer's upcoming invoice.
      *
-     * @param  string  $description
-     * @param  int  $amount
+     * @param  string $description
+     * @param  int    $amount
      * @param  array  $options
      * @return \SierraTecnologia\InvoiceItem
      * @throws \InvalidArgumentException
@@ -86,12 +88,14 @@ trait Billable
             throw new InvalidArgumentException(class_basename($this).' is not a SierraTecnologia customer. See the createAsSierraTecnologiaCustomer method.');
         }
 
-        $options = array_merge([
+        $options = array_merge(
+            [
             'customer' => $this->sierratecnologia_id,
             'amount' => $amount,
             'currency' => $this->preferredCurrency(),
             'description' => $description,
-        ], $options);
+            ], $options
+        );
 
         return SierraTecnologiaInvoiceItem::create($options, Cashier::sierratecnologiaOptions());
     }
@@ -99,8 +103,8 @@ trait Billable
     /**
      * Invoice the customer for the given amount and generate an invoice immediately.
      *
-     * @param  string  $description
-     * @param  int  $amount
+     * @param  string $description
+     * @param  int    $amount
      * @param  array  $tabOptions
      * @param  array  $invoiceOptions
      * @return \SierraTecnologia\Invoice|bool
@@ -115,8 +119,8 @@ trait Billable
     /**
      * Begin creating a new subscription.
      *
-     * @param  string  $subscription
-     * @param  string  $plan
+     * @param  string $subscription
+     * @param  string $plan
      * @return \SierraTecnologia\Cashier\SubscriptionBuilder
      */
     public function newSubscription($subscription, $plan)
@@ -127,8 +131,8 @@ trait Billable
     /**
      * Determine if the SierraTecnologia model is on trial.
      *
-     * @param  string  $subscription
-     * @param  string|null  $plan
+     * @param  string      $subscription
+     * @param  string|null $plan
      * @return bool
      */
     public function onTrial($subscription = 'default', $plan = null)
@@ -160,8 +164,8 @@ trait Billable
     /**
      * Determine if the SierraTecnologia model has a given subscription.
      *
-     * @param  string  $subscription
-     * @param  string|null  $plan
+     * @param  string      $subscription
+     * @param  string|null $plan
      * @return bool
      */
     public function subscribed($subscription = 'default', $plan = null)
@@ -183,16 +187,20 @@ trait Billable
     /**
      * Get a subscription instance by name.
      *
-     * @param  string  $subscription
+     * @param  string $subscription
      * @return \SierraTecnologia\Cashier\Subscription|null
      */
     public function subscription($subscription = 'default')
     {
-        return $this->subscriptions->sortByDesc(function ($value) {
-            return $value->created_at->getTimestamp();
-        })->first(function ($value) use ($subscription) {
-            return $value->name === $subscription;
-        });
+        return $this->subscriptions->sortByDesc(
+            function ($value) {
+                return $value->created_at->getTimestamp();
+            }
+        )->first(
+            function ($value) use ($subscription) {
+                return $value->name === $subscription;
+            }
+        );
     }
 
     /**
@@ -208,7 +216,7 @@ trait Billable
     /**
      * Invoice the billable entity outside of regular billing cycle.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return \SierraTecnologia\Invoice|bool
      */
     public function invoice(array $options = [])
@@ -245,7 +253,7 @@ trait Billable
     /**
      * Find an invoice by ID.
      *
-     * @param  string  $id
+     * @param  string $id
      * @return \SierraTecnologia\Cashier\Invoice|null
      */
     public function findInvoice($id)
@@ -256,8 +264,8 @@ trait Billable
             );
 
             $sierratecnologiaInvoice->lines = SierraTecnologiaInvoice::retrieve($id, Cashier::sierratecnologiaOptions())
-                        ->lines
-                        ->all(['limit' => 1000]);
+                ->lines
+                ->all(['limit' => 1000]);
 
             return new Invoice($this, $sierratecnologiaInvoice);
         } catch (Exception $e) {
@@ -268,7 +276,7 @@ trait Billable
     /**
      * Find an invoice or throw a 404 error.
      *
-     * @param  string  $id
+     * @param  string $id
      * @return \SierraTecnologia\Cashier\Invoice
      */
     public function findInvoiceOrFail($id)
@@ -289,7 +297,7 @@ trait Billable
     /**
      * Create an invoice download Response.
      *
-     * @param  string  $id
+     * @param  string $id
      * @param  array  $data
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -302,7 +310,7 @@ trait Billable
      * Get a collection of the entity's invoices.
      *
      * @param  bool  $includePending
-     * @param  array  $parameters
+     * @param  array $parameters
      * @return \Illuminate\Support\Collection
      */
     public function invoices($includePending = false, $parameters = [])
@@ -330,7 +338,7 @@ trait Billable
     /**
      * Get an array of the entity's invoices.
      *
-     * @param  array  $parameters
+     * @param  array $parameters
      * @return \Illuminate\Support\Collection
      */
     public function invoicesIncludingPending(array $parameters = [])
@@ -341,7 +349,7 @@ trait Billable
     /**
      * Get a collection of the entity's cards.
      *
-     * @param  array  $parameters
+     * @param  array $parameters
      * @return \Illuminate\Support\Collection
      */
     public function cards($parameters = [])
@@ -386,7 +394,7 @@ trait Billable
     /**
      * Update customer's credit card.
      *
-     * @param  string  $token
+     * @param  string $token
      * @return void
      */
     public function updateCard($token)
@@ -432,10 +440,12 @@ trait Billable
         if ($defaultCard) {
             $this->fillCardDetails($defaultCard)->save();
         } else {
-            $this->forceFill([
+            $this->forceFill(
+                [
                 'card_brand' => null,
                 'card_last_four' => null,
-            ])->save();
+                ]
+            )->save();
         }
 
         return $this;
@@ -444,7 +454,7 @@ trait Billable
     /**
      * Fills the model's properties with the source from SierraTecnologia.
      *
-     * @param  \SierraTecnologia\Card|\SierraTecnologia\BankAccount|null  $card
+     * @param  \SierraTecnologia\Card|\SierraTecnologia\BankAccount|null $card
      * @return $this
      */
     protected function fillCardDetails($card)
@@ -467,9 +477,11 @@ trait Billable
      */
     public function deleteCards()
     {
-        $this->cards()->each(function ($card) {
-            $card->delete();
-        });
+        $this->cards()->each(
+            function ($card) {
+                $card->delete();
+            }
+        );
 
         $this->updateCardFromSierraTecnologia();
     }
@@ -477,7 +489,7 @@ trait Billable
     /**
      * Apply a coupon to the billable entity.
      *
-     * @param  string  $coupon
+     * @param  string $coupon
      * @return void
      */
     public function applyCoupon($coupon)
@@ -492,8 +504,8 @@ trait Billable
     /**
      * Determine if the SierraTecnologia model is actively subscribed to one of the given plans.
      *
-     * @param  array|string  $plans
-     * @param  string  $subscription
+     * @param  array|string $plans
+     * @param  string       $subscription
      * @return bool
      */
     public function subscribedToPlan($plans, $subscription = 'default')
@@ -516,14 +528,18 @@ trait Billable
     /**
      * Determine if the entity is on the given plan.
      *
-     * @param  string  $plan
+     * @param  string $plan
      * @return bool
      */
     public function onPlan($plan)
     {
-        return ! is_null($this->subscriptions->first(function ($value) use ($plan) {
-            return $value->sierratecnologia_plan === $plan && $value->valid();
-        }));
+        return ! is_null(
+            $this->subscriptions->first(
+                function ($value) use ($plan) {
+                    return $value->sierratecnologia_plan === $plan && $value->valid();
+                }
+            )
+        );
     }
 
     /**
@@ -539,7 +555,7 @@ trait Billable
     /**
      * Create a SierraTecnologia customer for the given model.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return \SierraTecnologia\Customer
      */
     public function createAsSierraTecnologiaCustomer(array $options = [])
@@ -565,7 +581,7 @@ trait Billable
     /**
      * Update the underlying SierraTecnologia customer information for the model.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return \SierraTecnologia\Customer
      */
     public function updateSierraTecnologiaCustomer(array $options = [])
@@ -578,7 +594,7 @@ trait Billable
     /**
      * Get the SierraTecnologia customer instance for the current user and token.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return \SierraTecnologia\Customer
      */
     public function createOrGetSierraTecnologiaCustomer(array $options = [])

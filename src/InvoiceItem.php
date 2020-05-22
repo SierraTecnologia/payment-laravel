@@ -23,8 +23,8 @@ class InvoiceItem
     /**
      * Create a new invoice item instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $owner
-     * @param  \SierraTecnologia\SierraTecnologiaObject  $item
+     * @param  \Illuminate\Database\Eloquent\Model      $owner
+     * @param  \SierraTecnologia\SierraTecnologiaObject $item
      * @return void
      */
     public function __construct($owner, $item)
@@ -104,7 +104,7 @@ class InvoiceItem
     /**
      * Format the given amount into a string based on the owner model's preferences.
      *
-     * @param  int  $amount
+     * @param  int $amount
      * @return string
      */
     protected function formatAmount($amount)
@@ -125,7 +125,7 @@ class InvoiceItem
     /**
      * Dynamically access the SierraTecnologia line item instance.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)

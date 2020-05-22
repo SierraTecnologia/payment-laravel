@@ -71,13 +71,13 @@ class Cashier
             return $key;
         }
 
-        return config('services.sierratecnologia.key');
+        return \Illuminate\Support\Facades\Config::get('services.sierratecnologia.key');
     }
 
     /**
      * Set the publishable SierraTecnologia API key.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return void
      */
     public static function setSierraTecnologiaKey($key)
@@ -100,13 +100,13 @@ class Cashier
             return $key;
         }
 
-        return config('services.sierratecnologia.secret');
+        return \Illuminate\Support\Facades\Config::get('services.sierratecnologia.secret');
     }
 
     /**
      * Set the secret SierraTecnologia API key.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return void
      */
     public static function setSierraTecnologiaSecret($key)
@@ -117,15 +117,17 @@ class Cashier
     /**
      * Get the default SierraTecnologia API options.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return array
      */
     public static function sierratecnologiaOptions(array $options = [])
     {
-        return array_merge([
+        return array_merge(
+            [
             'api_key' => static::sierratecnologiaSecret(),
             'sitecpayment_version' => static::SITECPAYMENT_VERSION,
-        ], $options);
+            ], $options
+        );
     }
 
     /**
@@ -135,14 +137,14 @@ class Cashier
      */
     public static function sierratecnologiaModel()
     {
-        return getenv('SITECPAYMENT_MODEL') ?: config('services.sierratecnologia.model', 'App\\User');
+        return getenv('SITECPAYMENT_MODEL') ?: \Illuminate\Support\Facades\Config::get('services.sierratecnologia.model', 'App\\User');
     }
 
     /**
      * Set the currency to be used when billing SierraTecnologia models.
      *
-     * @param  string  $currency
-     * @param  string|null  $symbol
+     * @param  string      $currency
+     * @param  string|null $symbol
      * @return void
      * @throws \Exception
      */
@@ -156,23 +158,23 @@ class Cashier
     /**
      * Guess the currency symbol for the given currency.
      *
-     * @param  string  $currency
+     * @param  string $currency
      * @return string
      * @throws \Exception
      */
     protected static function guessCurrencySymbol($currency)
     {
         switch (strtolower($currency)) {
-            case 'usd':
-            case 'aud':
-            case 'cad':
-                return '$';
-            case 'eur':
-                return '€';
-            case 'gbp':
-                return '£';
-            default:
-                throw new Exception('Unable to guess symbol for currency. Please explicitly specify it.');
+        case 'usd':
+        case 'aud':
+        case 'cad':
+            return '$';
+        case 'eur':
+            return '€';
+        case 'gbp':
+            return '£';
+        default:
+            throw new Exception('Unable to guess symbol for currency. Please explicitly specify it.');
         }
     }
 
@@ -189,7 +191,7 @@ class Cashier
     /**
      * Set the currency symbol to be used when formatting currency.
      *
-     * @param  string  $symbol
+     * @param  string $symbol
      * @return void
      */
     public static function useCurrencySymbol($symbol)
@@ -210,7 +212,7 @@ class Cashier
     /**
      * Set the custom currency formatter.
      *
-     * @param  callable  $callback
+     * @param  callable $callback
      * @return void
      */
     public static function formatCurrencyUsing(callable $callback)
@@ -221,7 +223,7 @@ class Cashier
     /**
      * Format the given amount into a displayable currency.
      *
-     * @param  int  $amount
+     * @param  int $amount
      * @return string
      */
     public static function formatAmount($amount)

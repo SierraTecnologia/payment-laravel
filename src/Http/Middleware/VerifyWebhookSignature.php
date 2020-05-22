@@ -27,8 +27,8 @@ final class VerifyWebhookSignature
     /**
      * Create a new middleware instance.
      *
-     * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \Illuminate\Contracts\Config\Repository  $config
+     * @param  \Illuminate\Contracts\Foundation\Application $app
+     * @param  \Illuminate\Contracts\Config\Repository      $config
      * @return void
      */
     public function __construct(Application $app, Config $config)
@@ -40,8 +40,8 @@ final class VerifyWebhookSignature
     /**
      * Handle the incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure                 $next
      * @return \Illuminate\Http\Response
      */
     public function handle($request, Closure $next)

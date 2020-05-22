@@ -47,13 +47,16 @@ class SubscriptionsTest extends IntegrationTestCase
         static::$premiumPlanId = static::$sierratecnologiaPrefix.'monthly-20-premium-'.Str::random(10);
         static::$couponId = static::$sierratecnologiaPrefix.'coupon-'.Str::random(10);
 
-        Product::create([
+        Product::create(
+            [
             'id' => static::$productId,
             'name' => 'Laravel Cashier Test Product',
             'type' => 'service',
-        ]);
+            ]
+        );
 
-        Plan::create([
+        Plan::create(
+            [
             'id' => static::$planId,
             'nickname' => 'Monthly $10',
             'currency' => 'USD',
@@ -61,9 +64,11 @@ class SubscriptionsTest extends IntegrationTestCase
             'billing_scheme' => 'per_unit',
             'amount' => 1000,
             'product' => static::$productId,
-        ]);
+            ]
+        );
 
-        Plan::create([
+        Plan::create(
+            [
             'id' => static::$otherPlanId,
             'nickname' => 'Monthly $10 Other',
             'currency' => 'USD',
@@ -71,9 +76,11 @@ class SubscriptionsTest extends IntegrationTestCase
             'billing_scheme' => 'per_unit',
             'amount' => 1000,
             'product' => static::$productId,
-        ]);
+            ]
+        );
 
-        Plan::create([
+        Plan::create(
+            [
             'id' => static::$premiumPlanId,
             'nickname' => 'Monthly $20 Premium',
             'currency' => 'USD',
@@ -81,15 +88,18 @@ class SubscriptionsTest extends IntegrationTestCase
             'billing_scheme' => 'per_unit',
             'amount' => 2000,
             'product' => static::$productId,
-        ]);
+            ]
+        );
 
-        Coupon::create([
+        Coupon::create(
+            [
             'id' => static::$couponId,
             'duration' => 'repeating',
             'amount_off' => 500,
             'duration_in_months' => 3,
             'currency' => 'USD',
-        ]);
+            ]
+        );
     }
 
     public static function tearDownAfterClass()
@@ -186,9 +196,11 @@ class SubscriptionsTest extends IntegrationTestCase
         $user->newSubscription('main', static::$planId)->create('tok_visa');
         $subscription = $user->subscription('main');
 
-        $subscription->swap(static::$otherPlanId, [
+        $subscription->swap(
+            static::$otherPlanId, [
             'coupon' => static::$couponId,
-        ]);
+            ]
+        );
 
         $this->assertEquals(static::$couponId, $subscription->asSierraTecnologiaSubscription()->discount->coupon->id);
     }
@@ -378,14 +390,16 @@ class SubscriptionsTest extends IntegrationTestCase
     {
         $user = $this->createCustomer('subscription_state_scopes');
 
-        $subscription = $user->subscriptions()->create([
+        $subscription = $user->subscriptions()->create(
+            [
             'name' => 'yearly',
             'sitecpayment_id' => 'xxxx',
             'sitecpayment_plan' => 'sitecpayment-yearly',
             'quantity' => 1,
             'trial_ends_at' => null,
             'ends_at' => null,
-        ]);
+            ]
+        );
 
         // subscription is active
         $this->assertTrue($user->subscriptions()->active()->exists());

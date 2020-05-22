@@ -18,13 +18,17 @@ class CashierServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->registerMigrations();
 
-            $this->publishes([
+            $this->publishes(
+                [
                 __DIR__.'/../database/migrations' => $this->app->databasePath('migrations'),
-            ], 'cashier-migrations');
+                ], 'cashier-migrations'
+            );
 
-            $this->publishes([
+            $this->publishes(
+                [
                 __DIR__.'/../resources/views' => $this->app->resourcePath('views/vendor/cashier'),
-            ], 'cashier-views');
+                ], 'cashier-views'
+            );
         }
     }
 

@@ -27,13 +27,16 @@ class WebhooksTest extends IntegrationTestCase
         static::$productId = static::$sierratecnologiaPrefix.'product-1'.Str::random(10);
         static::$planId = static::$sierratecnologiaPrefix.'monthly-10-'.Str::random(10);
 
-        Product::create([
+        Product::create(
+            [
             'id' => static::$productId,
             'name' => 'Laravel Cashier Test Product',
             'type' => 'service',
-        ]);
+            ]
+        );
 
-        Plan::create([
+        Plan::create(
+            [
             'id' => static::$planId,
             'nickname' => 'Monthly $10',
             'currency' => 'USD',
@@ -41,7 +44,8 @@ class WebhooksTest extends IntegrationTestCase
             'billing_scheme' => 'per_unit',
             'amount' => 1000,
             'product' => static::$productId,
-        ]);
+            ]
+        );
     }
 
     public static function tearDownAfterClass()
@@ -58,16 +62,20 @@ class WebhooksTest extends IntegrationTestCase
         $subscription = $user->newSubscription('main', static::$planId)->create('tok_visa');
 
         $response = (new CashierTestControllerStub)->handleWebhook(
-            Request::create('/', 'POST', [], [], [], [], json_encode([
-                'id' => 'foo',
-                'type' => 'customer.subscription.deleted',
-                'data' => [
+            Request::create(
+                '/', 'POST', [], [], [], [], json_encode(
+                    [
+                    'id' => 'foo',
+                    'type' => 'customer.subscription.deleted',
+                    'data' => [
                     'object' => [
                         'id' => $subscription->sierratecnologia_id,
                         'customer' => $user->sierratecnologia_id,
                     ],
-                ],
-            ]))
+                    ],
+                    ]
+                )
+            )
         );
 
         $this->assertEquals(200, $response->getStatusCode());

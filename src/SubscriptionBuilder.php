@@ -75,8 +75,8 @@ class SubscriptionBuilder
      * Create a new subscription builder instance.
      *
      * @param  mixed  $owner
-     * @param  string  $name
-     * @param  string  $plan
+     * @param  string $name
+     * @param  string $plan
      * @return void
      */
     public function __construct($owner, $name, $plan)
@@ -89,7 +89,7 @@ class SubscriptionBuilder
     /**
      * Specify the quantity of the subscription.
      *
-     * @param  int  $quantity
+     * @param  int $quantity
      * @return $this
      */
     public function quantity($quantity)
@@ -102,7 +102,7 @@ class SubscriptionBuilder
     /**
      * Specify the number of days of the trial.
      *
-     * @param  int  $trialDays
+     * @param  int $trialDays
      * @return $this
      */
     public function trialDays($trialDays)
@@ -115,7 +115,7 @@ class SubscriptionBuilder
     /**
      * Specify the ending date of the trial.
      *
-     * @param  \Carbon\Carbon  $trialUntil
+     * @param  \Carbon\Carbon $trialUntil
      * @return $this
      */
     public function trialUntil(Carbon $trialUntil)
@@ -140,7 +140,7 @@ class SubscriptionBuilder
     /**
      * Change the billing cycle anchor on a plan creation.
      *
-     * @param  \DateTimeInterface|int  $date
+     * @param  \DateTimeInterface|int $date
      * @return $this
      */
     public function anchorBillingCycleOn($date)
@@ -157,7 +157,7 @@ class SubscriptionBuilder
     /**
      * The coupon to apply to a new subscription.
      *
-     * @param  string  $coupon
+     * @param  string $coupon
      * @return $this
      */
     public function withCoupon($coupon)
@@ -170,7 +170,7 @@ class SubscriptionBuilder
     /**
      * The metadata to apply to a new subscription.
      *
-     * @param  array  $metadata
+     * @param  array $metadata
      * @return $this
      */
     public function withMetadata($metadata)
@@ -183,7 +183,7 @@ class SubscriptionBuilder
     /**
      * Add a new SierraTecnologia subscription to the SierraTecnologia model.
      *
-     * @param  array  $options
+     * @param  array $options
      * @return \SierraTecnologia\Cashier\Subscription
      */
     public function add(array $options = [])
@@ -194,8 +194,8 @@ class SubscriptionBuilder
     /**
      * Create a new SierraTecnologia subscription.
      *
-     * @param  string|null  $token
-     * @param  array  $options
+     * @param  string|null $token
+     * @param  array       $options
      * @return \SierraTecnologia\Cashier\Subscription
      */
     public function create($token = null, array $options = [])
@@ -216,21 +216,23 @@ class SubscriptionBuilder
             $trialEndsAt = $this->trialExpires;
         }
 
-        return $this->owner->subscriptions()->create([
+        return $this->owner->subscriptions()->create(
+            [
             'name' => $this->name,
             'sitecpayment_id' => $subscription->id,
             'sitecpayment_plan' => $this->plan,
             'quantity' => $this->quantity,
             'trial_ends_at' => $trialEndsAt,
             'ends_at' => null,
-        ]);
+            ]
+        );
     }
 
     /**
      * Get the SierraTecnologia customer instance for the current user and token.
      *
-     * @param  string|null  $token
-     * @param  array  $options
+     * @param  string|null $token
+     * @param  array       $options
      * @return \SierraTecnologia\Customer
      */
     protected function getSierraTecnologiaCustomer($token = null, array $options = [])
@@ -251,7 +253,8 @@ class SubscriptionBuilder
      */
     protected function buildPayload()
     {
-        return array_filter([
+        return array_filter(
+            [
             'billing_cycle_anchor' => $this->billingCycleAnchor,
             'coupon' => $this->coupon,
             'metadata' => $this->metadata,
@@ -259,7 +262,8 @@ class SubscriptionBuilder
             'quantity' => $this->quantity,
             'tax_percent' => $this->getTaxPercentageForPayload(),
             'trial_end' => $this->getTrialEndForPayload(),
-        ]);
+            ]
+        );
     }
 
     /**

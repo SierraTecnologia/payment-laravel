@@ -20,7 +20,7 @@ class WebhookController extends Controller
      */
     public function __construct()
     {
-        if (config('services.sierratecnologia.webhook.secret')) {
+        if (\Illuminate\Support\Facades\Config::get('services.sierratecnologia.webhook.secret')) {
             $this->middleware(VerifyWebhookSignature::class);
         }
     }
@@ -28,7 +28,7 @@ class WebhookController extends Controller
     /**
      * Handle a SierraTecnologia webhook call.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function handleWebhook(Request $request)
@@ -54,37 +54,41 @@ class WebhookController extends Controller
         if ($user = $this->getUserBySierraTecnologiaId($payload['data']['object']['customer'])) {
             $data = $payload['data']['object'];
 
-            $user->subscriptions->filter(function (Subscription $subscription) use ($data) {
-                return $subscription->sierratecnologia_id === $data['id'];
-            })->each(function (Subscription $subscription) use ($data) {
-                // Quantity...
-                if (isset($data['quantity'])) {
-                    $subscription->quantity = $data['quantity'];
+            $user->subscriptions->filter(
+                function (Subscription $subscription) use ($data) {
+                    return $subscription->sierratecnologia_id === $data['id'];
                 }
-
-                // Plan...
-                if (isset($data['plan']['id'])) {
-                    $subscription->sierratecnologia_plan = $data['plan']['id'];
-                }
-
-                // Trial ending date...
-                if (isset($data['trial_end'])) {
-                    $trial_ends = Carbon::createFromTimestamp($data['trial_end']);
-
-                    if (! $subscription->trial_ends_at || $subscription->trial_ends_at->ne($trial_ends)) {
-                        $subscription->trial_ends_at = $trial_ends;
+            )->each(
+                function (Subscription $subscription) use ($data) {
+                    // Quantity...
+                    if (isset($data['quantity'])) {
+                        $subscription->quantity = $data['quantity'];
                     }
-                }
 
-                // Cancellation date...
-                if (isset($data['cancel_at_period_end']) && $data['cancel_at_period_end']) {
-                    $subscription->ends_at = $subscription->onTrial()
+                    // Plan...
+                    if (isset($data['plan']['id'])) {
+                        $subscription->sierratecnologia_plan = $data['plan']['id'];
+                    }
+
+                    // Trial ending date...
+                    if (isset($data['trial_end'])) {
+                        $trial_ends = Carbon::createFromTimestamp($data['trial_end']);
+
+                        if (! $subscription->trial_ends_at || $subscription->trial_ends_at->ne($trial_ends)) {
+                            $subscription->trial_ends_at = $trial_ends;
+                        }
+                    }
+
+                    // Cancellation date...
+                    if (isset($data['cancel_at_period_end']) && $data['cancel_at_period_end']) {
+                        $subscription->ends_at = $subscription->onTrial()
                                 ? $subscription->trial_ends_at
                                 : Carbon::createFromTimestamp($data['current_period_end']);
-                }
+                    }
 
-                $subscription->save();
-            });
+                    $subscription->save();
+                }
+            );
         }
 
         return new Response('Webhook Handled', 200);
@@ -93,17 +97,21 @@ class WebhookController extends Controller
     /**
      * Handle a cancelled customer from a SierraTecnologia subscription.
      *
-     * @param  array  $payload
+     * @param  array $payload
      * @return \Symfony\Component\HttpFoundation\Response
      */
     protected function handleCustomerSubscriptionDeleted(array $payload)
     {
         if ($user = $this->getUserBySierraTecnologiaId($payload['data']['object']['customer'])) {
-            $user->subscriptions->filter(function ($subscription) use ($payload) {
-                return $subscription->sierratecnologia_id === $payload['data']['object']['id'];
-            })->each(function ($subscription) {
-                $subscription->markAsCancelled();
-            });
+            $user->subscriptions->filter(
+                function ($subscription) use ($payload) {
+                    return $subscription->sierratecnologia_id === $payload['data']['object']['id'];
+                }
+            )->each(
+                function ($subscription) {
+                    $subscription->markAsCancelled();
+                }
+            );
         }
 
         return new Response('Webhook Handled', 200);
@@ -148,16 +156,20 @@ class WebhookController extends Controller
     protected function handleCustomerDeleted(array $payload)
     {
         if ($user = $this->getUserBySierraTecnologiaId($payload['data']['object']['id'])) {
-            $user->subscriptions->each(function (Subscription $subscription) {
-                $subscription->skipTrial()->markAsCancelled();
-            });
+            $user->subscriptions->each(
+                function (Subscription $subscription) {
+                    $subscription->skipTrial()->markAsCancelled();
+                }
+            );
 
-            $user->forceFill([
+            $user->forceFill(
+                [
                 'sitecpayment_id' => null,
                 'trial_ends_at' => null,
                 'card_brand' => null,
                 'card_last_four' => null,
-            ])->save();
+                ]
+            )->save();
         }
 
         return new Response('Webhook Handled', 200);
@@ -166,7 +178,7 @@ class WebhookController extends Controller
     /**
      * Get the billable entity instance by SierraTecnologia ID.
      *
-     * @param  string  $sierratecnologiaId
+     * @param  string $sierratecnologiaId
      * @return \SierraTecnologia\Cashier\Billable
      */
     protected function getUserBySierraTecnologiaId($sierratecnologiaId)
@@ -179,7 +191,7 @@ class WebhookController extends Controller
     /**
      * Handle calls to missing methods on the controller.
      *
-     * @param  array  $parameters
+     * @param  array $parameters
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function missingMethod($parameters = [])

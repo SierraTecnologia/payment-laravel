@@ -23,8 +23,8 @@ class Card
     /**
      * Create a new card instance.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $owner
-     * @param  \SierraTecnologia\Card  $card
+     * @param  \Illuminate\Database\Eloquent\Model $owner
+     * @param  \SierraTecnologia\Card              $card
      * @return void
      */
     public function __construct($owner, SierraTecnologiaCard $card)
@@ -56,7 +56,7 @@ class Card
     /**
      * Dynamically get values from the SierraTecnologia card.
      *
-     * @param  string  $key
+     * @param  string $key
      * @return mixed
      */
     public function __get($key)

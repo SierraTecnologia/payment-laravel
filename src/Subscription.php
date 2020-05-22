@@ -86,14 +86,16 @@ class Subscription extends Model
     /**
      * Filter query by active.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeActive($query)
     {
-        $query->whereNull('ends_at')->orWhere(function ($query) {
-            $query->onGracePeriod();
-        });
+        $query->whereNull('ends_at')->orWhere(
+            function ($query) {
+                $query->onGracePeriod();
+            }
+        );
     }
 
     /**
@@ -109,7 +111,7 @@ class Subscription extends Model
     /**
      * Filter query by recurring.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeRecurring($query)
@@ -130,7 +132,7 @@ class Subscription extends Model
     /**
      * Filter query by cancelled.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeCancelled($query)
@@ -141,7 +143,7 @@ class Subscription extends Model
     /**
      * Filter query by not cancelled.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeNotCancelled($query)
@@ -162,7 +164,7 @@ class Subscription extends Model
     /**
      * Filter query by ended.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeEnded($query)
@@ -183,7 +185,7 @@ class Subscription extends Model
     /**
      * Filter query by on trial.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeOnTrial($query)
@@ -194,7 +196,7 @@ class Subscription extends Model
     /**
      * Filter query by not on trial.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeNotOnTrial($query)
@@ -215,7 +217,7 @@ class Subscription extends Model
     /**
      * Filter query by on grace period.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeOnGracePeriod($query)
@@ -226,7 +228,7 @@ class Subscription extends Model
     /**
      * Filter query by not on grace period.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @param  \Illuminate\Database\Eloquent\Builder $query
      * @return void
      */
     public function scopeNotOnGracePeriod($query)
@@ -237,7 +239,7 @@ class Subscription extends Model
     /**
      * Increment the quantity of the subscription.
      *
-     * @param  int  $count
+     * @param  int $count
      * @return $this
      */
     public function incrementQuantity($count = 1)
@@ -250,7 +252,7 @@ class Subscription extends Model
     /**
      *  Increment the quantity of the subscription, and invoice immediately.
      *
-     * @param  int  $count
+     * @param  int $count
      * @return $this
      */
     public function incrementAndInvoice($count = 1)
@@ -265,7 +267,7 @@ class Subscription extends Model
     /**
      * Decrement the quantity of the subscription.
      *
-     * @param  int  $count
+     * @param  int $count
      * @return $this
      */
     public function decrementQuantity($count = 1)
@@ -278,8 +280,8 @@ class Subscription extends Model
     /**
      * Update the quantity of the subscription.
      *
-     * @param  int  $quantity
-     * @param  \SierraTecnologia\Customer|null  $customer
+     * @param  int                             $quantity
+     * @param  \SierraTecnologia\Customer|null $customer
      * @return $this
      */
     public function updateQuantity($quantity, $customer = null)
@@ -314,7 +316,7 @@ class Subscription extends Model
     /**
      * Change the billing cycle anchor on a plan change.
      *
-     * @param  \DateTimeInterface|int|string  $date
+     * @param  \DateTimeInterface|int|string $date
      * @return $this
      */
     public function anchorBillingCycleOn($date = 'now')
@@ -345,7 +347,7 @@ class Subscription extends Model
     /**
      * Swap the subscription to a new SierraTecnologia plan.
      *
-     * @param  string  $plan
+     * @param  string $plan
      * @param  array  $options
      * @return $this
      */
@@ -393,10 +395,12 @@ class Subscription extends Model
             // all attempts to collect payment fail, webhooks will handle any update to it.
         }
 
-        $this->fill([
+        $this->fill(
+            [
             'sitecpayment_plan' => $plan,
             'ends_at' => null,
-        ])->save();
+            ]
+        )->save();
 
         return $this;
     }
