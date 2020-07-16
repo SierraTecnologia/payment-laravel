@@ -15,7 +15,11 @@ class CreateCustomerColumns extends Migration
     {
         Schema::table(
             'users', function (Blueprint $table) {
-                $table->string('sitecpayment_id')->nullable()->collation('utf8mb4_bin');
+                if (config('database.default') == 'mysql') {
+                    $table->string('sitecpayment_id')->nullable()->collation('utf8mb4_bin');
+                } else {
+                    $table->string('sitecpayment_id')->nullable();
+                }
                 $table->string('card_brand')->nullable();
                 $table->string('card_last_four', 4)->nullable();
                 $table->timestamp('trial_ends_at')->nullable();

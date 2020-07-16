@@ -18,7 +18,11 @@ class CreateSubscriptionsTable extends Migration
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id');
                 $table->string('name');
-                $table->string('sitecpayment_id')->collation('utf8mb4_bin');
+                if (config('database.default') == 'mysql') {
+                    $table->string('sitecpayment_id')->collation('utf8mb4_bin');
+                } else {
+                    $table->string('sitecpayment_id');
+                }
                 $table->string('sitecpayment_plan');
                 $table->integer('quantity');
                 $table->timestamp('trial_ends_at')->nullable();
