@@ -25,6 +25,7 @@
         "illuminate/view": "^5.0|^6.0|^7.0|^8.0",
         "nesbot/carbon": ">=1.26",
         "sierratecnologia/payment-php": "dev-master",
+        "sierratecnologia/telefonica": "dev-master",
         "symfony/http-kernel": ">=4.2"
     },
     "require-dev": {
