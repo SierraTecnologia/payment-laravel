@@ -36,9 +36,9 @@ class Card
     /**
      * Delete the card.
      *
-     * @return \SierraTecnologia\Card
+     * @return SierraTecnologiaCard
      */
-    public function delete()
+    public function delete(): SierraTecnologiaCard
     {
         return $this->card->delete();
     }

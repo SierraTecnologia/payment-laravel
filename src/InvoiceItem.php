@@ -34,45 +34,11 @@ class InvoiceItem
     }
 
     /**
-     * Get the total for the line item.
-     *
-     * @return string
-     */
-    public function total()
-    {
-        return $this->formatAmount($this->amount);
-    }
-
-    /**
-     * Get a human readable date for the start date.
-     *
-     * @return string
-     */
-    public function startDate()
-    {
-        if ($this->isSubscription()) {
-            return $this->startDateAsCarbon()->toFormattedDateString();
-        }
-    }
-
-    /**
-     * Get a human readable date for the end date.
-     *
-     * @return string
-     */
-    public function endDate()
-    {
-        if ($this->isSubscription()) {
-            return $this->endDateAsCarbon()->toFormattedDateString();
-        }
-    }
-
-    /**
      * Get a Carbon instance for the start date.
      *
-     * @return \Carbon\Carbon
+     * @return Carbon|null
      */
-    public function startDateAsCarbon()
+    public function startDateAsCarbon(): ?Carbon
     {
         if ($this->isSubscription()) {
             return Carbon::createFromTimestampUTC($this->item->period->start);
@@ -82,9 +48,9 @@ class InvoiceItem
     /**
      * Get a Carbon instance for the end date.
      *
-     * @return \Carbon\Carbon
+     * @return Carbon|null
      */
-    public function endDateAsCarbon()
+    public function endDateAsCarbon(): ?Carbon
     {
         if ($this->isSubscription()) {
             return Carbon::createFromTimestampUTC($this->item->period->end);
@@ -110,16 +76,6 @@ class InvoiceItem
     protected function formatAmount($amount)
     {
         return Cashier::formatAmount($amount);
-    }
-
-    /**
-     * Get the underlying SierraTecnologia invoice item.
-     *
-     * @return \SierraTecnologia\SierraTecnologiaObject
-     */
-    public function asSierraTecnologiaInvoiceItem()
-    {
-        return $this->item;
     }
 
     /**

@@ -249,9 +249,11 @@ class SubscriptionBuilder
     /**
      * Build the payload for subscription creation.
      *
-     * @return array
+     * @return (array|float|int|string)[]
+     *
+     * @psalm-return array{billing_cycle_anchor?: int, coupon?: string, metadata?: array, plan?: string, quantity?: int, tax_percent?: float|int, trial_end?: int}
      */
-    protected function buildPayload()
+    protected function buildPayload(): array
     {
         return array_filter(
             [
@@ -269,7 +271,7 @@ class SubscriptionBuilder
     /**
      * Get the trial ending date for the SierraTecnologia payload.
      *
-     * @return int|null
+     * @return false|int|null|string
      */
     protected function getTrialEndForPayload()
     {

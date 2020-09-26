@@ -40,10 +40,11 @@ class Invoice
     /**
      * Get a Carbon date for the invoice.
      *
-     * @param  \DateTimeZone|string $timezone
-     * @return \Carbon\Carbon
+     * @param \DateTimeZone|string $timezone
+     *
+     * @return Carbon
      */
-    public function date($timezone = null)
+    public function date($timezone = null): Carbon
     {
         $carbon = Carbon::createFromTimestampUTC($this->invoice->created ?? $this->invoice->date);
 
@@ -149,7 +150,7 @@ class Invoice
     /**
      * Get the discount percentage for the invoice.
      *
-     * @return int
+     * @return float|int
      */
     public function percentOff()
     {
@@ -197,10 +198,13 @@ class Invoice
     /**
      * Get all of the invoice items by a given type.
      *
-     * @param  string $type
-     * @return array
+     * @param string $type
+     *
+     * @return InvoiceItem[]
+     *
+     * @psalm-return list<InvoiceItem>
      */
-    public function invoiceItemsByType($type)
+    public function invoiceItemsByType($type): array
     {
         $lineItems = [];
 
@@ -248,10 +252,11 @@ class Invoice
     /**
      * Capture the invoice as a PDF and return the raw bytes.
      *
-     * @param  array $data
-     * @return string
+     * @param array $data
+     *
+     * @return null|string
      */
-    public function pdf(array $data)
+    public function pdf(array $data): ?string
     {
         if (! defined('DOMPDF_ENABLE_AUTOLOAD')) {
             define('DOMPDF_ENABLE_AUTOLOAD', false);
@@ -287,9 +292,9 @@ class Invoice
     /**
      * Get the raw starting balance for the invoice.
      *
-     * @return float
+     * @return int
      */
-    public function rawStartingBalance()
+    public function rawStartingBalance(): int
     {
         return isset($this->invoice->starting_balance)
             ? $this->invoice->starting_balance
