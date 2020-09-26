@@ -29,9 +29,11 @@
         "symfony/http-kernel": ">=4.2"
     },
     "require-dev": {
-        "mockery/mockery": ">=1.0",
-        "orchestra/testbench": "^4.0|^5.0|^6.0",
-        "phpunit/phpunit": ">=7.5"
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "orchestra/testbench": "^5.0",
+        "phpunit/phpunit": "^9.3",
+        "psalm/plugin-laravel": "^1.2",
+        "vimeo/psalm": "^3.11"
     },
     "autoload": {
         "psr-4": {
@@ -43,6 +45,14 @@
             "SierraTecnologia\\Cashier\\Tests\\": "tests/"
         }
     },
+    "scripts": {
+       "psalm": "vendor/bin/psalm",
+       "test": "vendor/bin/phpunit",
+       "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+       "format": "vendor/bin/php-cs-fixer fix --allow-risky=yes",
+       "check-style": "phpcs -p --standard=PSR12 src --extensions=php",
+       "fix-style": "phpcbf -p --standard=PSR12 src --extensions=php"
+   },
     "extra": {
         "branch-alias": {
             "dev-master": "10.0-dev"
