@@ -40,7 +40,7 @@ class CashierServiceProvider extends ServiceProvider
     protected function registerMigrations()
     {
         if (Cashier::$runsMigrations) {
-            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+            $this->loadMigrationsFrom(__DIR__.DIRECTORY_SEPARATOR.'..'.DIRECTORY_SEPARATOR.'database'.DIRECTORY_SEPARATOR.'migrations');
         }
     }
 }
