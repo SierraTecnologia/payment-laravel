@@ -46,9 +46,9 @@ class InvoiceItem
     /**
      * Get a human readable date for the start date.
      *
-     * @return string
+     * @return null|string
      */
-    public function startDate()
+    public function startDate(): ?string
     {
         if ($this->isSubscription()) {
             return $this->startDateAsCarbon()->toFormattedDateString();
@@ -58,9 +58,9 @@ class InvoiceItem
     /**
      * Get a human readable date for the end date.
      *
-     * @return string
+     * @return null|string
      */
-    public function endDate()
+    public function endDate(): ?string
     {
         if ($this->isSubscription()) {
             return $this->endDateAsCarbon()->toFormattedDateString();
@@ -70,9 +70,9 @@ class InvoiceItem
     /**
      * Get a Carbon instance for the start date.
      *
-     * @return \Carbon\Carbon
+     * @return Carbon|null
      */
-    public function startDateAsCarbon()
+    public function startDateAsCarbon(): ?Carbon
     {
         if ($this->isSubscription()) {
             return Carbon::createFromTimestampUTC($this->item->period->start);
@@ -82,9 +82,9 @@ class InvoiceItem
     /**
      * Get a Carbon instance for the end date.
      *
-     * @return \Carbon\Carbon
+     * @return Carbon|null
      */
-    public function endDateAsCarbon()
+    public function endDateAsCarbon(): ?Carbon
     {
         if ($this->isSubscription()) {
             return Carbon::createFromTimestampUTC($this->item->period->end);

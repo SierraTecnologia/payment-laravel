@@ -269,7 +269,9 @@ class SubscriptionBuilder
     /**
      * Get the trial ending date for the SierraTecnologia payload.
      *
-     * @return int|null
+     * @return false|int|null|string
+     *
+     * @psalm-return 'now'|false|int|null
      */
     protected function getTrialEndForPayload()
     {
