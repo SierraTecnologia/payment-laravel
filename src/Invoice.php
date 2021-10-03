@@ -149,7 +149,9 @@ class Invoice
     /**
      * Get the discount percentage for the invoice.
      *
-     * @return int
+     * @return float|int
+     *
+     * @psalm-return 0|float
      */
     public function percentOff()
     {
@@ -248,10 +250,11 @@ class Invoice
     /**
      * Capture the invoice as a PDF and return the raw bytes.
      *
-     * @param  array $data
-     * @return string
+     * @param array $data
+     *
+     * @return null|string
      */
-    public function pdf(array $data)
+    public function pdf(array $data): ?string
     {
         if (! defined('DOMPDF_ENABLE_AUTOLOAD')) {
             define('DOMPDF_ENABLE_AUTOLOAD', false);
