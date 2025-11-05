@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<ruleset name="Payment Laravel Coding Standard">
+    <description>PSR-12 coding standard for Payment Laravel</description>
+
+    <!-- Show progress and sniff codes -->
+    <arg value="ps"/>
+
+    <!-- Use colors in output -->
+    <arg name="colors"/>
+
+    <!-- Show sniff codes in all reports -->
+    <arg value="ns"/>
+
+    <!-- Check these directories -->
+    <file>src</file>
+    <file>tests</file>
+
+    <!-- Exclude patterns -->
+    <exclude-pattern>*/vendor/*</exclude-pattern>
+    <exclude-pattern>*/database/migrations/*</exclude-pattern>
+    <exclude-pattern>*/resources/views/*</exclude-pattern>
+    <exclude-pattern>*/.phpstorm.meta.php</exclude-pattern>
+    <exclude-pattern>*/_ide_helper.php</exclude-pattern>
+
+    <!-- Use PSR-12 as the base standard -->
+    <rule ref="PSR12">
+        <!-- Allow multiple statements per line for short getters/setters -->
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+        <exclude name="Generic.Formatting.DisallowMultipleStatements.SameLine"/>
+    </rule>
+
+    <!-- Additional rules -->
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnconditionalIfStatement"/>
+    <rule ref="Generic.CodeAnalysis.UnnecessaryFinalModifier"/>
+    <rule ref="Generic.Commenting.Todo"/>
+    <rule ref="Generic.Commenting.Fixme"/>
+    <rule ref="Generic.Files.LineLength">
+        <properties>
+            <property name="lineLimit" value="120"/>
+            <property name="absoluteLineLimit" value="150"/>
+        </properties>
+    </rule>
+
+    <!-- Configure line length -->
+    <rule ref="Generic.Files.LineLength">
+        <exclude-pattern>*/tests/*</exclude-pattern>
+    </rule>
+
+    <!-- Arrays -->
+    <rule ref="Squiz.Arrays.ArrayBracketSpacing"/>
+
+    <!-- Classes -->
+    <rule ref="Squiz.Classes.ValidClassName"/>
+
+    <!-- Commenting -->
+    <rule ref="Squiz.Commenting.DocCommentAlignment"/>
+    <rule ref="Squiz.Commenting.EmptyCatchComment"/>
+    <rule ref="Squiz.Commenting.InlineComment"/>
+    <rule ref="Squiz.Commenting.PostStatementComment"/>
+
+    <!-- Control Structures -->
+    <rule ref="Squiz.ControlStructures.ControlSignature"/>
+    <rule ref="Squiz.ControlStructures.ForEachLoopDeclaration"/>
+    <rule ref="Squiz.ControlStructures.ForLoopDeclaration"/>
+    <rule ref="Squiz.ControlStructures.LowercaseDeclaration"/>
+
+    <!-- Functions -->
+    <rule ref="Squiz.Functions.FunctionDeclaration"/>
+    <rule ref="Squiz.Functions.FunctionDeclarationArgumentSpacing"/>
+    <rule ref="Squiz.Functions.LowercaseFunctionKeywords"/>
+    <rule ref="Squiz.Functions.MultiLineFunctionDeclaration"/>
+
+    <!-- Operators -->
+    <rule ref="Squiz.Operators.ValidLogicalOperators"/>
+
+    <!-- Scope -->
+    <rule ref="Squiz.Scope.MethodScope"/>
+    <rule ref="Squiz.Scope.MemberVarScope"/>
+    <rule ref="Squiz.Scope.StaticThisUsage"/>
+
+    <!-- Strings -->
+    <rule ref="Squiz.Strings.ConcatenationSpacing">
+        <properties>
+            <property name="spacing" value="1"/>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.Strings.DoubleQuoteUsage"/>
+
+    <!-- Whitespace -->
+    <rule ref="Squiz.WhiteSpace.CastSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LanguageConstructSpacing"/>
+    <rule ref="Squiz.WhiteSpace.LogicalOperatorSpacing"/>
+    <rule ref="Squiz.WhiteSpace.ObjectOperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.OperatorSpacing">
+        <properties>
+            <property name="ignoreNewlines" value="true"/>
+        </properties>
+    </rule>
+    <rule ref="Squiz.WhiteSpace.ScopeClosingBrace"/>
+    <rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
+    <rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
+    <rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
+</ruleset>
