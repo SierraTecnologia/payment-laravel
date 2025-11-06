@@ -1,0 +1,21 @@
+includes:
+    - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+
+parameters:
+    level: 8
+    paths:
+        - src
+    excludePaths:
+        - src/Http/Middleware/VerifyWebhookSignature.php
+    tmpDir: build/phpstan
+    checkOctaneCompatibility: true
+    checkModelProperties: true
+    checkMissingIterableValueType: false
+    reportUnmatchedIgnoredErrors: false
+    ignoreErrors:
+        # Ignore errors from legacy code
+        - '#Call to an undefined method Illuminate\\Database\\Eloquent\\Model::#'
+        # Ignore Eloquent magic methods
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\Model::\$#'
+        # Ignore dynamic properties on models
+        - '#Property .+ does not accept .+#'
