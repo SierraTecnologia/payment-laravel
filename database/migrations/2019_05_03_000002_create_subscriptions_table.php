@@ -13,8 +13,7 @@ class CreateSubscriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create(
-            'subscriptions', function (Blueprint $table) {
+        Schema::hasTable('subscriptions') || Schema::create('subscriptions', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->unsignedBigInteger('user_id');
                 $table->string('name');
