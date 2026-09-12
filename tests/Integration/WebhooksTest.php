@@ -20,7 +20,7 @@ class WebhooksTest extends IntegrationTestCase
      */
     protected static $planId;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -48,7 +48,7 @@ class WebhooksTest extends IntegrationTestCase
         );
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 

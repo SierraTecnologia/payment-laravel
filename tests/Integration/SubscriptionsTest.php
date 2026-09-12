@@ -37,7 +37,7 @@ class SubscriptionsTest extends IntegrationTestCase
      */
     protected static $couponId;
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
 
@@ -102,7 +102,7 @@ class SubscriptionsTest extends IntegrationTestCase
         );
     }
 
-    public static function tearDownAfterClass()
+    public static function tearDownAfterClass(): void
     {
         parent::tearDownAfterClass();
 

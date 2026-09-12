@@ -13,9 +13,10 @@ use SierraTecnologia\Cashier\Http\Middleware\VerifyWebhookSignature;
 
 final class VerifyWebhookSignatureTest extends TestCase
 {
-    public function tearDown()
+    protected function tearDown(): void
     {
         m::close();
+        parent::tearDown();
     }
 
     public function test_response_is_received_when_secret_matches()

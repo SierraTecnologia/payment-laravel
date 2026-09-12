@@ -13,18 +13,28 @@ class CreateCustomerColumns extends Migration
      */
     public function up()
     {
-        Schema::table(
-            'users', function (Blueprint $table) {
-                if (config('database.default') == 'mysql') {
-                    $table->string('sitecpayment_id')->nullable()->collation('utf8mb4_bin');
-                } else {
-                    $table->string('sitecpayment_id')->nullable();
+        if (Schema::hasTable('users')) {
+            Schema::table(
+                'users', function (Blueprint $table) {
+                    if (! Schema::hasColumn('users', 'sitecpayment_id')) {
+                        if (config('database.default') == 'mysql') {
+                            $table->string('sitecpayment_id')->nullable()->collation('utf8mb4_bin');
+                        } else {
+                            $table->string('sitecpayment_id')->nullable();
+                        }
+                    }
+                    if (! Schema::hasColumn('users', 'card_brand')) {
+                        $table->string('card_brand')->nullable();
+                    }
+                    if (! Schema::hasColumn('users', 'card_last_four')) {
+                        $table->string('card_last_four', 4)->nullable();
+                    }
+                    if (! Schema::hasColumn('users', 'trial_ends_at')) {
+                        $table->timestamp('trial_ends_at')->nullable();
+                    }
                 }
-                $table->string('card_brand')->nullable();
-                $table->string('card_last_four', 4)->nullable();
-                $table->timestamp('trial_ends_at')->nullable();
-            }
-        );
+            );
+        }
     }
 
     /**
@@ -34,17 +44,19 @@ class CreateCustomerColumns extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'users', function (Blueprint $table) {
-                $table->dropColumn(
-                    [
-                    'sitecpayment_id',
-                    'card_brand',
-                    'card_last_four',
-                    'trial_ends_at',
-                    ]
-                );
+        if (Schema::hasTable('users')) {
+            $columns = array_values(array_filter([
+                'sitecpayment_id',
+                'card_brand',
+                'card_last_four',
+                'trial_ends_at',
+            ], static fn (string $column): bool => Schema::hasColumn('users', $column)));
+
+            if ($columns !== []) {
+                Schema::table('users', function (Blueprint $table) use ($columns) {
+                    $table->dropColumn($columns);
+                });
             }
-        );
+        }
     }
 }

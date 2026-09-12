@@ -17,9 +17,13 @@ abstract class IntegrationTestCase extends TestCase
      */
     protected static $sierratecnologiaPrefix = 'cashier-test-';
 
-    public static function setUpBeforeClass()
+    public static function setUpBeforeClass(): void
     {
         parent::setUpBeforeClass();
+
+        if (! getenv('SITECPAYMENT_SECRET')) {
+            self::markTestSkipped('Integration tests require SITECPAYMENT_SECRET.');
+        }
 
         SierraTecnologia::setApiKey(getenv('SITECPAYMENT_SECRET'));
     }

@@ -173,6 +173,8 @@ class Cashier
             return '€';
         case 'gbp':
             return '£';
+        case 'brl':
+            return 'R$';
         default:
             throw new Exception('Unable to guess symbol for currency. Please explicitly specify it.');
         }
@@ -215,7 +217,7 @@ class Cashier
      * @param  callable $callback
      * @return void
      */
-    public static function formatCurrencyUsing(callable $callback)
+    public static function formatCurrencyUsing(?callable $callback)
     {
         static::$formatCurrencyUsing = $callback;
     }

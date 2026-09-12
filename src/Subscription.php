@@ -18,13 +18,13 @@ class Subscription extends Model
     protected $guarded = [];
 
     /**
-     * The attributes that should be mutated to dates.
+     * The attributes that should be cast.
      *
      * @var array
      */
-    protected $dates = [
-        'trial_ends_at', 'ends_at',
-        'created_at', 'updated_at',
+    protected $casts = [
+        'trial_ends_at' => 'datetime',
+        'ends_at' => 'datetime',
     ];
 
     /**
